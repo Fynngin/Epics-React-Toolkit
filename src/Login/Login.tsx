@@ -1,19 +1,23 @@
 import { useState } from "react"
+import { useHistory, useLocation } from "react-router-dom";
 import { login } from "../api/api";
-import { UserCredentials } from "../interfaces/UserCredentials";
-
-
-async function sendLoginRequest(credentials: UserCredentials) {
-    const response = await login(credentials);
-    console.log(response);
-}
+import { useAuth } from '../App';
 
 export default function Login() {
     const [creds, setCreds] = useState({email: '', password: ''})
+    const history = useHistory();
+    const location = useLocation();
+    const auth = useAuth();
 
-    function handleLogin(event: React.FormEvent) {
+    async function handleLogin(event: React.FormEvent) {
         event.preventDefault();
-        sendLoginRequest(creds);
+        const response: any = await login(creds);
+        if (response.status === 200) {
+            const from: any = location.state || { from: { pathname: '/' } };
+            auth.signin(response.data.data.jwt);
+            history.replace(from);
+            history.push('/');
+        }
     }
 
     return(
