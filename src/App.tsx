@@ -10,7 +10,13 @@ import {
 } from 'react-router-dom';
 import { useContext, createContext, useState } from "react";
 
-const authContext = createContext({jwt: "", signin: (jwt: string) => {}, signout: () => {}});
+interface Auth {
+  jwt: string
+  signin: (jwt: string) => void
+  signout: () => void
+}
+
+const authContext = createContext({jwt: "", signin: (jwt: string) => {}, signout: () => {}} as Auth);
 
 function ProvideAuth({ children }: any) {
   const auth = useProvideAuth();
@@ -40,7 +46,7 @@ function useProvideAuth() {
     jwt,
     signin,
     signout
-  };
+  } as Auth;
 }
 
 function PrivateRoute({ children, ...rest }: any) {
