@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import { getSpinner, getStorePacks } from "../api/api";
 import { useAuth } from "../App"
-import { Pack } from "../interfaces/Pack";
-import StorePackDisplay from "./StorePackDisplay";
 import { CurrencyDollarIcon, GiftIcon } from '@heroicons/react/solid';
+import StorePackDisplay from "./StorePackDisplay";
 import SpinnerOddsChart from "./SpinnerOddsChart";
 import { Spinner } from "../interfaces/Spinner";
+import { SpinnerItem } from "../interfaces/SpinnerItem";
+import { Pack } from "../interfaces/Pack";
+import SpinnerOddsTable from "./SpinnerOddsTable";
 
 function filterActivePacks(packs: Pack[]) {
     const today = new Date();
@@ -19,7 +21,11 @@ function filterActivePacks(packs: Pack[]) {
 }
 
 function sortPacksByInventoryCount(packs: Pack[]) {
-    return packs.sort((a, b) => b.inventoryCount - a.inventoryCount)
+    return packs.sort((a: Pack, b: Pack) => b.inventoryCount - a.inventoryCount)
+}
+
+function sortSpinnerOddsByChance(spinner: Spinner) {
+    return spinner.items.sort((a: SpinnerItem, b: SpinnerItem) => b.chance - a.chance);
 }
 
 export default function Home() {
@@ -36,7 +42,8 @@ export default function Home() {
         }
 
         const initSpinnerOdds = async () => {
-            const spinnerOdds = await getSpinner(auth.jwt, 1);
+            let spinnerOdds = await getSpinner(auth.jwt, 1);
+            spinnerOdds.items = sortSpinnerOddsByChance(spinnerOdds);
             setSpinner(spinnerOdds);
         }
 
@@ -61,6 +68,9 @@ export default function Home() {
                 </div>
                 <div className='h-60'>
                     <SpinnerOddsChart spinner={spinner}/>
+                </div>
+                <div>
+                    <SpinnerOddsTable spinner={spinner}/>
                 </div>
             </div>: <div/>}
         </div>

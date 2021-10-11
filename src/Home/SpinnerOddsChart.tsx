@@ -14,7 +14,6 @@ export default function SpinnerOddsChart({ spinner }: {spinner: Spinner}) {
         const odds: ItemChance[] = spinner.items.map(item => {
             return {name: item.name, data: [item.chance]} as ItemChance;
         })
-        odds.sort((a: ItemChance, b: ItemChance) => b.data[0] - a.data[0]);
         setSpinnerOdds(odds);
     }, [spinner])
 
