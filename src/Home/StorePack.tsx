@@ -9,7 +9,7 @@ function getPackImage(pack: Pack): string {
 
 export default function StorePack({ pack }: { pack: Pack }) {
     return(
-        <div className='w-36 border-2 border-green-700 rounded-md flex flex-col'>
+        <div className='w-36 h-full border-2 border-green-700 rounded-md flex flex-col'>
             <div className='flex-grow text-center p-2 bg-green-700'>
                 <p>{pack.name}</p>
             </div>
