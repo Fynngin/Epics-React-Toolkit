@@ -1,10 +1,13 @@
+import { Button, TextField, Link } from "@mui/material";
+import { Box } from "@mui/system";
 import { useState } from "react"
-import { useHistory, useLocation } from "react-router-dom";
+import {  useHistory, useLocation } from "react-router-dom";
 import { login } from "../api/api";
 import { useAuth } from '../App';
 
 export default function Login() {
-    const [creds, setCreds] = useState({email: '', password: ''})
+    const [creds, setCreds] = useState({email: '', password: ''});
+    const [hideLoginInfo, toggleLoginInfo] = useState(true);
     const history = useHistory();
     const location = useLocation();
     const auth = useAuth();
@@ -21,43 +24,53 @@ export default function Login() {
     }
 
     return(
-        <div className='flex flex-col items-center justify-center py-12 px-12 font-mono'>
-            <div className='max-h-sm max-w-md bg-gray-500 py-6 px-6 rounded-md shadow-sm border-green-500 border-2'>
-                <form className='bg-gray-500 space-y-4' onSubmit={handleLogin}>
+        <div className='flex flex-col items-center justify-center py-12 px-12 max-w-xl m-auto'>
+            <h1 className='mb-2 text-xl text-center'>
+                Welcome to Epics Toolkit v2
+            </h1>
+            <Box sx={{border: 2, borderRadius: 2, borderColor: 'primary.main', p: 4, width: '100%'}}>
+                <form className='space-y-4 mb-4' onSubmit={handleLogin}>
                     <div>
-                        <label htmlFor='email'>E-Mail:</label>
-                        <input 
+                        <TextField 
                             id='email' 
-                            className='rounded w-full focus:ring-2 focus:outline-none focus:ring-green-500 focus:z-10 text-black px-1'
-                            type='email' 
-                            name='email' 
-                            autoComplete='email' 
+                            label='E-Mail'
+                            type='email'
+                            autoComplete='email'
+                            fullWidth
                             onChange={e => setCreds({...creds, email: e.target.value})}
                             value={creds.email}
-                            required/>
+                            required
+                        />
                     </div>
                     <div>
-                        <label>
-                            <label htmlFor='password'>Password:</label>
-                            <input 
-                                id='password' 
-                                className='rounded w-full focus:ring-2 focus:outline-none focus:ring-green-500 focus:z-10 text-black px-1'
-                                type='password' 
-                                name='password' 
-                                autoComplete='current-password' 
-                                onChange={e => setCreds({...creds, password: e.target.value})}
-                                value={creds.password}
-                                required
-                            />
-                        </label>
+                        <TextField 
+                            id='password' 
+                            label='Password'
+                            type='password' 
+                            autoComplete='current-password' 
+                            fullWidth
+                            onChange={e => setCreds({...creds, password: e.target.value})}
+                            value={creds.password}
+                            required
+                        />
                     </div>
                     <div className='mt-6'>
-                        <button type='submit' className='bg-green-500 px-2 rounded'>
+                        <Button type='submit' variant='contained' size='small'>
                             Log In
-                        </button>
+                        </Button>
                     </div>
                 </form>
-            </div>
+                <div className='text-center'>
+                    <Link onClick={() => toggleLoginInfo(!hideLoginInfo)}>Why is this needed?</Link>
+                    <p hidden={hideLoginInfo}>
+                        Your login is needed to send requests to the Epics API.
+                        Your login credentials will never be saved!
+                        All my code can be found on my&nbsp;
+                        <Link target="_blank" rel="noopener noreferrer"  href="https://github.com/Fynngin/Epics-React-Toolkit">GitHub</Link>
+                        , if you want to verify yourself.
+                    </p>
+                </div>
+            </Box>
         </div>
     )
 }
