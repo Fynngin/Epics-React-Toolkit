@@ -11,10 +11,12 @@ export default function SpinnerOddsChart({ spinner }: {spinner: Spinner}) {
     const [spinnerOdds, setSpinnerOdds] = useState<ItemChance[]>([]);
 
     useEffect(() => {
-        const odds: ItemChance[] = spinner.items.map(item => {
-            return {name: item.name, data: [item.chance]} as ItemChance;
-        })
-        setSpinnerOdds(odds);
+        if (spinner.items) {
+            const odds: ItemChance[] = spinner.items.map(item => {
+                return {name: item.name, data: [item.chance]} as ItemChance;
+            })
+            setSpinnerOdds(odds);
+        }
     }, [spinner])
 
     const options: any = {
