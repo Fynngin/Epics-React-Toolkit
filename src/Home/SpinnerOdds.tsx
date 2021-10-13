@@ -40,7 +40,7 @@ export default function SpinnerOdds() {
     }, [auth]);
 
     return(
-        <Card sx={{margin: 2}}>
+        <Card>
             <CardHeader title='Spinner Odds' avatar={<Redeem/>}/>
             <CardContent>
                 <div className='h-60'>

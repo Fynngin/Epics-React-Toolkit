@@ -56,7 +56,7 @@ function PrivateRoute({ children, ...rest }: any) {
     <Route
       {...rest}
       render={({ location }) =>
-        auth.user.jwt.length > 0 ? (
+        auth.user.jwt ? (
           children
         ) : (
           <Redirect

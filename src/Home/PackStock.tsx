@@ -37,7 +37,7 @@ export default function PackStock() {
     }, [auth]);
 
     return(
-        <Card sx={{margin: 2}}>
+        <Card>
             <CardHeader title='Store Packs' avatar={<MonetizationOn/>}/>
             <CardContent>
                 <StorePackDisplay packs={packs}/>
