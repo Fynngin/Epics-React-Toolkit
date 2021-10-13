@@ -9,7 +9,7 @@ import { Spinner } from "../interfaces/Spinner";
 import { getSpinner } from "../api/api";
 import { SpinnerItem } from "../interfaces/SpinnerItem";
 
-const ExpandMore = styled((props: {expand: boolean, onClick: () => void}) => {
+const ExpandMore = styled((props: {expand: boolean}) => {
   const { expand: boolean, ...other } = props;
   return <IconButton {...other} />;
     })(({ theme, expand }) => ({
@@ -47,10 +47,16 @@ export default function SpinnerOdds() {
                     <SpinnerOddsChart spinner={spinner}/>
                 </div>
             </CardContent>
-            <CardActions disableSpacing>
+            <CardActions 
+                disableSpacing
+                onClick={() => setExpandSpinnerOddsTable(!expandSpinnerOddsTable)}
+                sx={{cursor: 'pointer'}}
+            >
+                <p style={{fontSize: '14px', marginLeft: 'auto'}}>
+                    {expandSpinnerOddsTable ? 'Hide' : 'Show'} Details
+                </p>
                 <ExpandMore
                     expand={expandSpinnerOddsTable}
-                    onClick={() => setExpandSpinnerOddsTable(!expandSpinnerOddsTable)}
                     aria-expanded={expandSpinnerOddsTable}
                     aria-label="show more"
                 >
