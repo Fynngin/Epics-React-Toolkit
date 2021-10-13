@@ -24,7 +24,10 @@ export default function SpinnerOddsChart({ spinner }: {spinner: Spinner}) {
             type: 'bar',
             stacked: true,
             foreColor: '#fff',
-            background: 'transparent'
+            background: 'transparent',
+        },
+        theme: {
+            mode: 'dark'
         },
         plotOptions: {
             bar: {

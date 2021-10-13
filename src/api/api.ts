@@ -3,14 +3,20 @@ import axiosRateLimit from "axios-rate-limit";
 import { UserCredentials } from "../interfaces/UserCredentials";
 import { Pack } from "../interfaces/Pack";
 import { Spinner } from "../interfaces/Spinner";
+import { User } from "../interfaces/User";
 
 const http = axiosRateLimit(axios.create(), {maxRequests: 130, perMilliseconds: 60000})
 
-export function login(credentials: UserCredentials) {
-    return http('https://api.epics.gg/api/v1/auth/login', {
+export async function login(credentials: UserCredentials): Promise<User> {
+    const response: any = await http('https://api.epics.gg/api/v1/auth/login', {
         method: 'POST',
         data: credentials
     })
+
+    if (response.status === 200) 
+        return response.data.data as User;
+    
+    return {} as User;
 }
 
 export async function getStorePacks(jwt: string, categoryId: number): Promise<Pack[]> {

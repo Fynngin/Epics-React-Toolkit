@@ -31,7 +31,7 @@ export default function SpinnerOdds() {
 
     useEffect(() => {
         const initSpinnerOdds = async () => {
-            let spinnerOdds = await getSpinner(auth.jwt, 1);
+            let spinnerOdds = await getSpinner(auth.user.jwt, 1);
             spinnerOdds.items = sortSpinnerOddsByChance(spinnerOdds);
             setSpinner(spinnerOdds);
         }

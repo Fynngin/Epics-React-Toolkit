@@ -1,23 +1,26 @@
-import { Button, TextField, Link } from "@mui/material";
+import { Button, TextField, Link, CircularProgress } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react"
 import {  useHistory, useLocation } from "react-router-dom";
 import { login } from "../api/api";
 import { useAuth } from '../App';
+import { User } from "../interfaces/User";
 
 export default function Login() {
     const [creds, setCreds] = useState({email: '', password: ''});
     const [hideLoginInfo, toggleLoginInfo] = useState(true);
+    const [loading, setLoading] = useState(false);
     const history = useHistory();
     const location = useLocation();
     const auth = useAuth();
 
     async function handleLogin(event: React.FormEvent) {
         event.preventDefault();
-        const response: any = await login(creds);
-        if (response.status === 200) {
+        setLoading(true);
+        const user: User = await login(creds);
+        if (user.jwt) {
             const from: any = location.state || { from: { pathname: '/' } };
-            auth.signin(response.data.data.jwt);
+            auth.signin(user);
             history.replace(from);
             history.push('/');
         }
@@ -55,8 +58,11 @@ export default function Login() {
                         />
                     </div>
                     <div className='mt-6'>
-                        <Button type='submit' variant='contained' size='small'>
+                        <Button type='submit' variant='contained' size='small' disabled={loading}>
                             Log In
+                            {loading && (
+                                <CircularProgress color='primary' size={12} sx={{ml: 2}}/>
+                            )}
                         </Button>
                     </div>
                 </form>

@@ -9,14 +9,15 @@ import {
   Redirect
 } from 'react-router-dom';
 import { useContext, createContext, useState } from "react";
+import { User } from './interfaces/User';
 
 interface Auth {
-  jwt: string
-  signin: (jwt: string) => void
+  user: User
+  signin: (user: User) => void
   signout: () => void
 }
 
-const authContext = createContext({jwt: "", signin: (jwt: string) => {}, signout: () => {}} as Auth);
+const authContext = createContext({user: {} as User, signin: (user: User) => {}, signout: () => {}} as Auth);
 
 function ProvideAuth({ children }: any) {
   const auth = useProvideAuth();
@@ -32,18 +33,18 @@ export function useAuth() {
 }
 
 function useProvideAuth() {
-  const [jwt, setJwt] = useState("");
+  const [user, setUser] = useState({} as User);
 
-  const signin = (jwt: string) => {
-    setJwt(jwt);
+  const signin = (user: User) => {
+    setUser(user);
   };
 
   const signout = () => {
-    setJwt("");
+    setUser({} as User);
   };
 
   return {
-    jwt,
+    user,
     signin,
     signout
   } as Auth;
@@ -55,7 +56,7 @@ function PrivateRoute({ children, ...rest }: any) {
     <Route
       {...rest}
       render={({ location }) =>
-        auth.jwt.length > 0 ? (
+        auth.user.jwt.length > 0 ? (
           children
         ) : (
           <Redirect

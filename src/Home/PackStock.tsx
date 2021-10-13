@@ -27,7 +27,7 @@ export default function PackStock() {
 
     useEffect(() => {
         const initStorePacks = async () => {
-            const storePacks = await getStorePacks(auth.jwt, 1);
+            const storePacks = await getStorePacks(auth.user.jwt, 1);
             const activePacks = filterActivePacks(storePacks);
             const sortedPacks = sortPacksByInventoryCount(activePacks);
             setPacks(sortedPacks);
