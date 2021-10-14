@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom';
 import { useContext, createContext, useState } from "react";
 import { User } from './interfaces/User';
+import AccountTransfer from './AccountTransfer/AccountTransfer';
 
 interface Auth {
   user: User
@@ -77,6 +78,9 @@ function App() {
       <Router>
         <Switch>
           <Route path='/login' exact render={() => <Login/>}/>
+          <PrivateRoute path='/accounttransfer'>
+            <AccountTransfer/>
+          </PrivateRoute>
           <PrivateRoute path='/'>
             <Home/>
           </PrivateRoute>

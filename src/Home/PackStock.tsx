@@ -26,14 +26,21 @@ export default function PackStock() {
     const [packs, setPacks] = useState([] as Pack[]);
 
     useEffect(() => {
+        let mounted = true;
+
         const initStorePacks = async () => {
             const storePacks = await getStorePacks(auth.user.jwt, 1);
             const activePacks = filterActivePacks(storePacks);
             const sortedPacks = sortPacksByInventoryCount(activePacks);
-            setPacks(sortedPacks);
+            if (mounted)
+                setPacks(sortedPacks);
         }
 
         initStorePacks();
+
+        return () => {
+            mounted = false;
+        }
     }, [auth]);
 
     return(
