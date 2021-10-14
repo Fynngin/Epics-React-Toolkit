@@ -1,5 +1,5 @@
 import { CompareArrows, Group, Home, Menu as MenuIcon, Restaurant, Search, Sell, SportsEsports } from "@mui/icons-material";
-import { AppBar, Button, Grid, IconButton, Menu, MenuItem, Toolbar } from "@mui/material";
+import { AppBar, Button, Grid, IconButton, Menu, MenuItem, Toolbar, Typography } from "@mui/material";
 import { MouseEvent, useState } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
 import { useHistory } from "react-router";
@@ -110,6 +110,9 @@ export default function Navbar() {
             <MobileView>
                 <AppBar position='static'>
                     <Toolbar>
+                        <Typography variant="body1" component="div" sx={{ flexGrow: 1 }}>
+                            Menu
+                        </Typography>
                         <IconButton 
                             color='primary'
                             aria-controls="basic-menu"
@@ -119,7 +122,6 @@ export default function Navbar() {
                         >
                             <MenuIcon/>
                         </IconButton>
-                        Menu
                         <Menu
                             id='nav-menu'
                             anchorEl={menuAnchor}
