@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/epics-react-toolkit/static/css/main.bd27c4a5.chunk.css",
-    "main.js": "/epics-react-toolkit/static/js/main.f5daa3d3.chunk.js",
-    "main.js.map": "/epics-react-toolkit/static/js/main.f5daa3d3.chunk.js.map",
+    "main.js": "/epics-react-toolkit/static/js/main.f7eafb7c.chunk.js",
+    "main.js.map": "/epics-react-toolkit/static/js/main.f7eafb7c.chunk.js.map",
     "runtime-main.js": "/epics-react-toolkit/static/js/runtime-main.85631ffd.js",
     "runtime-main.js.map": "/epics-react-toolkit/static/js/runtime-main.85631ffd.js.map",
-    "static/js/2.b8d879fb.chunk.js": "/epics-react-toolkit/static/js/2.b8d879fb.chunk.js",
-    "static/js/2.b8d879fb.chunk.js.map": "/epics-react-toolkit/static/js/2.b8d879fb.chunk.js.map",
+    "static/js/2.afd0a0b6.chunk.js": "/epics-react-toolkit/static/js/2.afd0a0b6.chunk.js",
+    "static/js/2.afd0a0b6.chunk.js.map": "/epics-react-toolkit/static/js/2.afd0a0b6.chunk.js.map",
     "static/js/3.d2da237f.chunk.js": "/epics-react-toolkit/static/js/3.d2da237f.chunk.js",
     "static/js/3.d2da237f.chunk.js.map": "/epics-react-toolkit/static/js/3.d2da237f.chunk.js.map",
     "index.html": "/epics-react-toolkit/index.html",
     "static/css/main.bd27c4a5.chunk.css.map": "/epics-react-toolkit/static/css/main.bd27c4a5.chunk.css.map",
-    "static/js/2.b8d879fb.chunk.js.LICENSE.txt": "/epics-react-toolkit/static/js/2.b8d879fb.chunk.js.LICENSE.txt"
+    "static/js/2.afd0a0b6.chunk.js.LICENSE.txt": "/epics-react-toolkit/static/js/2.afd0a0b6.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.85631ffd.js",
-    "static/js/2.b8d879fb.chunk.js",
+    "static/js/2.afd0a0b6.chunk.js",
     "static/css/main.bd27c4a5.chunk.css",
-    "static/js/main.f5daa3d3.chunk.js"
+    "static/js/main.f7eafb7c.chunk.js"
   ]
 }
