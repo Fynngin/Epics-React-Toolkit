@@ -4,6 +4,7 @@ import { UserCredentials } from "../interfaces/UserCredentials";
 import { Pack } from "../interfaces/Pack";
 import { Spinner } from "../interfaces/Spinner";
 import { User } from "../interfaces/User";
+import { UserSearchResult } from "../interfaces/UserSearchResult";
 
 const http = axiosRateLimit(axios.create(), {maxRequests: 130, perMilliseconds: 60000})
 
@@ -64,4 +65,21 @@ export async function getSpinner(jwt: string, categoryId: number): Promise<Spinn
         return {} as Spinner;
     
     return response.data.data as Spinner;
+}
+
+export async function searchUsers(jwt: string, username: string): Promise<UserSearchResult[]> {
+    const response: any = await http('https://api.epics.gg/api/v1/users/search', {
+        method: 'GET',
+        headers: {
+            'x-user-jwt': jwt
+        },
+        params: {
+            'username': username
+        }
+    });
+
+    if (response.status !== 200)
+        return [];
+    
+    return response.data.data as UserSearchResult[];
 }

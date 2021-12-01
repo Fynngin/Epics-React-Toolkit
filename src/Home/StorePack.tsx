@@ -14,7 +14,7 @@ export default function StorePack({ pack }: { pack: Pack }) {
             <CardHeader 
                 sx={{ height: '4em' }}
                 avatar={
-                    <Avatar variant='square' src={`packTypeIcons/${pack.acquireType[0]}.svg`}/>
+                    <Avatar variant='square' src={`${process.env.PUBLIC_URL}/packTypeIcons/${pack.acquireType[0]}.svg`}/>
                 }
                 title={
                     <Typography variant="body1" sx={{opacity: 1, fontSize: 12 }}>
