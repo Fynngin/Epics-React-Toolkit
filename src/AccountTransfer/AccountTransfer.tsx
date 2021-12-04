@@ -6,6 +6,7 @@ import AccountSelector from "./AccountSelector";
 import { getAllItemIds, getUserCollections } from '../api/api';
 import { useAuth } from '../App';
 import { UserCollection } from '../interfaces/UserCollection';
+import BaseButton from '../BaseComponents/BaseButton';
 
 interface TradeItem {
     id: number
@@ -38,7 +39,6 @@ export default function AccountTransfer() {
                 }
             }
             setTradeItems([...tradeItems, ...items]);
-            console.log(`${coll.collection.name} added.`)
         })
     }
 
@@ -46,7 +46,7 @@ export default function AccountTransfer() {
         <div className='accTransferContainer'>
             <Navbar/>
             <AccountSelector onUserSelect={user => handleUserSelect(user)}/>
-            <button onClick={() => scanUserItems()}>Start Transfer</button>
+            <BaseButton onClick={() => scanUserItems()}>Start Transfer</BaseButton>
             <p>{tradeItems.length}</p>
         </div>
     )

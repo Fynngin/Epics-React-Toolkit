@@ -1,11 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
+
 :root {
-  --background: #282c34;
-  --primary: #2bc7c4;
+  --background: #151c25;
+  --primary: #f50057;
+  --secondary: #25313f;
+  --third-color: #e3e3e3;
   --secondary-gray: rgb(60, 60, 60);
 }
 
 body {
-  background-color: #282c34;
+  background-color: var(--background);
   color: white;
 }
 

@@ -1,8 +1,12 @@
 import './AccountSelector.css';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { searchUsers } from "../api/api";
 import { useAuth } from "../App";
 import { UserSearchResult } from "../interfaces/UserSearchResult";
+import BaseContainer from '../BaseComponents/BaseContainer';
+import BaseButton from '../BaseComponents/BaseButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 interface AccountSelectorProps {
     onUserSelect: (user: UserSearchResult) => void
@@ -34,17 +38,21 @@ export default function AccountSelector(props: AccountSelectorProps) {
         }
     }, [userSearchResults])
 
+    const inputField: any = useRef(null);
+    useEffect(() => window.addEventListener('click', evt => {
+        if (inputField.current && inputField.current.contains(evt.target))
+            setShowSearchResultsMenu(true);
+        else
+            setShowSearchResultsMenu(false);
+    }))
+
     return(
-        <div className='container'>
-                {selectedUser.id ? 
-                    <img
-                        className='avatar'
-                        src={`https://cdn.epics.gg${selectedUser.avatar}`}
-                        alt='User Avatar'
-                    />
-                : <></>}
-                <form onSubmit={handleUserSearch}>
+        <BaseContainer title='Select Account' description='This is where your items will be sent.'>
+            <div className='accSelectorContainer'>
+                <form onSubmit={handleUserSearch} className='searchForm'>
                     <input
+                        autoComplete='off'
+                        ref={inputField}
                         id='userSearchInput'
                         className='searchInput'
                         placeholder='Search users...'
@@ -56,14 +64,27 @@ export default function AccountSelector(props: AccountSelectorProps) {
                     {showSearchResultsMenu ? 
                         <ul className='dropdown'>
                             {userSearchResults.map((user: UserSearchResult) => (
-                                <li className='dropdownItem' onClick={() => handleUserSelection(user)}>
+                                <li key={user.id} className='dropdownItem' onClick={() => handleUserSelection(user)}>
                                     {user.username}
                                 </li>
                             ))}
                         </ul>
                     : <></>}
+                    <BaseButton type='submit' onClick={handleUserSearch} className='userSearchBtn'>
+                        <FontAwesomeIcon icon={faSearch}/>
+                    </BaseButton>
                 </form>
-                <p>{selectedUser.username}</p>
-        </div>
+                {selectedUser.id ? 
+                    <div className='selectedUser'>
+                        <img
+                            className='avatar'
+                            src={`https://cdn.epics.gg${selectedUser.avatar}`}
+                            alt='User Avatar'
+                        />
+                        <p>{selectedUser.username}</p>
+                    </div>
+                : <p className='infoText'>No user selected.</p>}
+            </div>
+        </BaseContainer>
     )
 }
