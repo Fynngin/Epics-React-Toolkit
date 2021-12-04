@@ -4,7 +4,11 @@ import { searchUsers } from "../api/api";
 import { useAuth } from "../App";
 import { UserSearchResult } from "../interfaces/UserSearchResult";
 
-export default function AccountSelector() {
+interface AccountSelectorProps {
+    onUserSelect: (user: UserSearchResult) => void
+}
+
+export default function AccountSelector(props: AccountSelectorProps) {
     const [userSearchInput, setUserSearchInput] = useState('');
     const [userSearchResults, setUserSearchResults] = useState([] as UserSearchResult[]);
     const [selectedUser, setSelectedUser] = useState({} as UserSearchResult);
@@ -18,6 +22,7 @@ export default function AccountSelector() {
 
     function handleUserSelection(user: UserSearchResult) {
         setSelectedUser(user);
+        props.onUserSelect(user);
         setShowSearchResultsMenu(false);
     }
 
