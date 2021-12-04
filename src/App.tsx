@@ -36,8 +36,10 @@ export function useAuth() {
 function useProvideAuth() {
   const [user, setUser] = useState({} as User);
 
-  const signin = (user: User) => {
-    setUser(user);
+  const signin = (user: any) => {
+    let newUser: User = user.user;
+    newUser.jwt = user.jwt;
+    setUser(newUser);
   };
 
   const signout = () => {

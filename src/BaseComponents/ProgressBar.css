@@ -1,0 +1,14 @@
+.progressContainer {
+    height: 0.5em;
+    width: 100%;
+    max-width: var(--max-app-width);
+    border-radius: 0.5em;
+    background: var(--secondary);
+}
+
+.progressContainer > #progressBar {
+    border-radius: 0.5em;
+    height: 0.5em;
+    background: var(--primary);
+    transition: width 1s ease-in-out;
+}

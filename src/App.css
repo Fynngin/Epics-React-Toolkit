@@ -6,6 +6,7 @@
   --secondary: #25313f;
   --third-color: #e3e3e3;
   --secondary-gray: rgb(60, 60, 60);
+  --max-app-width: 60em;
 }
 
 body {

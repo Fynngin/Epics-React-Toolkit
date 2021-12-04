@@ -1,7 +1,7 @@
 .baseContainer {
     padding: 1em;
     width: 100%;
-    max-width: 60em;
+    max-width: var(--max-app-width);
     background: var(--secondary);
     border-radius: 0.5em;
 }
