@@ -40,7 +40,7 @@ export default function AccountSelector(props: AccountSelectorProps) {
 
     const inputField: any = useRef(null);
     useEffect(() => window.addEventListener('click', evt => {
-        if (inputField.current && inputField.current.contains(evt.target))
+        if (inputField.current && inputField.current.contains(evt.target) && userSearchResults.length > 0)
             setShowSearchResultsMenu(true);
         else
             setShowSearchResultsMenu(false);
@@ -59,7 +59,6 @@ export default function AccountSelector(props: AccountSelectorProps) {
                         onChange={evt => {
                             setUserSearchInput(evt.target.value);
                         }}
-                        onFocus={() => setShowSearchResultsMenu(true)}
                     />
                     {showSearchResultsMenu ? 
                         <ul className='dropdown'>
