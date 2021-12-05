@@ -1,0 +1,47 @@
+.seasonsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+@media(max-width: 30em) {
+    .seasonsContainer {
+        flex-direction: column;
+        gap: 0.5em;
+    }
+}
+
+input[type=checkbox] {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.5em;
+    height: 1.5em;
+    border: 0.15em solid var(--primary);
+    border-radius: 0.25em;
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+}
+
+.checkbox {
+    display: grid;
+    grid-template-columns: 1em auto;
+    gap: 1em;
+    cursor: pointer;
+}
+
+input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--primary);
+}
+
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
