@@ -2,8 +2,42 @@
     padding: 1em;
     width: 100%;
     max-width: var(--max-app-width);
-    background: var(--secondary);
     border-radius: 0.5em;
+    background: var(--secondary);
+    position: relative;
+    overflow: hidden;
+}
+
+.baseContainer.loading::before {
+    content: "";
+    background-image: conic-gradient(
+        var(--primary) 20deg,
+        transparent 120deg
+    );
+    height: 200%;
+    width: 200%;
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    animation: rotate 2s linear infinite;
+}
+
+.baseContainer.loading::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    background: var(--secondary);
+}
+
+.baseContainer > * {
+    position: relative;
+    z-index: 10;
+}
+
+@keyframes rotate {
+    100%{
+        transform: rotate(-360deg);
+    }
 }
 
 .baseContainerTitle {

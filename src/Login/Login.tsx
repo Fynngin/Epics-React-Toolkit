@@ -1,10 +1,11 @@
-import { Button, TextField, Link, CircularProgress } from "@mui/material";
-import { Box } from "@mui/system";
 import { useState } from "react"
 import { useHistory, useLocation } from "react-router-dom";
 import { login } from "../api/api";
 import { useAuth } from '../App';
 import { User } from "../interfaces/User";
+import BaseButton from "../BaseComponents/BaseButton";
+import BaseContainer from "../BaseComponents/BaseContainer";
+import './Login.css';
 
 export default function Login() {
     const [creds, setCreds] = useState({email: '', password: ''});
@@ -31,52 +32,51 @@ export default function Login() {
             <h1 className='mb-2 text-xl text-center'>
                 Welcome to Epics Toolkit v2
             </h1>
-            <Box sx={{border: 2, borderRadius: 2, borderColor: 'primary.main', p: 4, width: '100%'}}>
+            <BaseContainer className={loading ? 'loading' : ''} title='Login' description='Log in with your Epics Account.'>
                 <form className='space-y-4 mb-4' onSubmit={handleLogin}>
                     <div>
-                        <TextField 
-                            id='email' 
-                            label='E-Mail'
+                        <input
+                            id='email'
                             type='email'
                             autoComplete='email'
-                            fullWidth
+                            placeholder='E-Mail'
+                            className='loginInput'
                             onChange={e => setCreds({...creds, email: e.target.value})}
                             value={creds.email}
                             required
                         />
                     </div>
                     <div>
-                        <TextField 
+                        <input 
                             id='password' 
-                            label='Password'
                             type='password' 
                             autoComplete='current-password' 
-                            fullWidth
+                            placeholder='Password'
+                            className='loginInput'
                             onChange={e => setCreds({...creds, password: e.target.value})}
                             value={creds.password}
                             required
                         />
                     </div>
                     <div className='mt-6'>
-                        <Button type='submit' variant='contained' size='small' disabled={loading}>
+                        <BaseButton type='submit'>
                             Log In
-                            {loading && (
-                                <CircularProgress color='primary' size={12} sx={{ml: 2}}/>
-                            )}
-                        </Button>
+                        </BaseButton>
                     </div>
                 </form>
                 <div className='text-center'>
-                    <Link onClick={() => toggleLoginInfo(!hideLoginInfo)}>Why is this needed?</Link>
+                    <span className='infoTextLink' onClick={() => toggleLoginInfo(!hideLoginInfo)}>
+                        Why is this needed?
+                    </span>
                     <p hidden={hideLoginInfo}>
                         Your login is needed to send requests to the Epics API.
                         Your login credentials will never be saved!
                         All my code can be found on my&nbsp;
-                        <Link target="_blank" rel="noopener noreferrer"  href="https://github.com/Fynngin/Epics-React-Toolkit">GitHub</Link>
+                        <a target="_blank" rel="noopener noreferrer"  href="https://github.com/Fynngin/Epics-React-Toolkit">GitHub</a>
                         , if you want to verify yourself.
                     </p>
                 </div>
-            </Box>
+            </BaseContainer>
         </div>
     )
 }

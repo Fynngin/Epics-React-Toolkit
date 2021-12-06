@@ -4,12 +4,13 @@ import { ReactNode } from "react"
 type Props = {
     title?: string
     description?: string
+    className?: string
     children?: ReactNode
 }
 
-export default function BaseContainer({title, description, children}: Props) {
+export default function BaseContainer({title, description, className, children}: Props) {
     return(
-        <div className='baseContainer'>
+        <div className={`baseContainer ${className}`}>
             {title ?
                 <h2 className='baseContainerTitle'>
                     {title}

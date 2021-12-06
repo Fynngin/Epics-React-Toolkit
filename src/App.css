@@ -14,6 +14,10 @@ body {
   color: white;
 }
 
+a {
+  color: var(--primary);
+}
+
 .App {
   text-align: center;
 }
