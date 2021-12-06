@@ -20,6 +20,7 @@ export default function AccountTransfer() {
     const [tradeItems, setTradeItems] = useState([] as TradeItem[]);
     const [collectionProgress, setCollectionProgress] = useState(0);
     const [totalCollections, setTotalCollections] = useState(0);
+    const [allowedSeasons, setAllowedSeasons] = useState([] as string[]);
     const auth = useAuth();
 
     function handleUserSelect(user: UserSearchResult) {
@@ -45,6 +46,10 @@ export default function AccountTransfer() {
         })
     }
 
+    function handleSeasonSelect(seasons: string[]) {
+        setAllowedSeasons(seasons);
+    }
+
     useEffect(() => setCollectionProgress(c => c + 1), [tradeItems])
 
     return(
@@ -54,7 +59,7 @@ export default function AccountTransfer() {
                 <ProgressBar max={totalCollections} progress={collectionProgress}/>
             : <></>}
             <AccountSelector onUserSelect={user => handleUserSelect(user)}/>
-            <FilterSelector/>
+            <FilterSelector onChange={handleSeasonSelect}/>
             <BaseButton onClick={() => scanUserItems()}>Start Transfer</BaseButton>
             <p>{tradeItems.length}</p>
         </div>
