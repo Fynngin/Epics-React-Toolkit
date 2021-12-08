@@ -29,10 +29,14 @@ export default function AccountTransfer() {
     async function scanUserItems() {
         const collections = await getUserCollections(auth.user.jwt, auth.user.id, 1);
         setTotalCollections(collections.length);
+        setTradeItems([]);
+        setCollectionProgress(0);
         const items: TradeItem[] = [];
         collections.forEach(async (coll: UserCollection) => {
-            if (coll.count === 0)
+            if (coll.count === 0 || !allowedSeasons.some((season: string) => coll.collection.properties.seasons.includes(season))) {
+                setCollectionProgress(c => c + 1);
                 return;
+            }
             for (const type of coll.collection.properties.entity_types) {
                 if (type !== 'card' && type !== 'sticker')
                     continue;
