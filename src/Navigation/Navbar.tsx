@@ -1,8 +1,10 @@
-import { CompareArrows, Group, Home, Menu as MenuIcon, Restaurant, Search, Sell, SportsEsports } from "@mui/icons-material";
+import { faBoxOpen, faExchangeAlt, faGamepad, faHome, faSearch, faTags, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AppBar, Button, Grid, IconButton, Menu, MenuItem, Toolbar, Typography } from "@mui/material";
 import { MouseEvent, useState } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
 import { useHistory } from "react-router";
+import './Navbar.css';
 
 interface Route {
     name: string
@@ -23,49 +25,49 @@ export default function Navbar() {
     const routes: Route[] = [
         {
             name: 'Home', 
-            icon: <Home />, 
+            icon: <FontAwesomeIcon icon={faHome} />, 
             isActive: isActiveRoute('/'), 
             path: '/',
             disabled: false
         },
         {
             name: 'Mint Search', 
-            icon: <Search />, 
+            icon: <FontAwesomeIcon icon={faSearch} />, 
             isActive: isActiveRoute('/mintsearch'), 
             path: '/mintsearch',
             disabled: true
         },
         {
             name: 'Mass List', 
-            icon: <Sell />, 
+            icon: <FontAwesomeIcon icon={faTags} />, 
             isActive: isActiveRoute('/masslist'), 
             path: '/masslist',
             disabled: true
         },
         {
             name: 'Rush Games', 
-            icon: <SportsEsports />, 
+            icon: <FontAwesomeIcon icon={faGamepad} />, 
             isActive: isActiveRoute('/rushgames'), 
             path: '/rushgames',
             disabled: true
         },
         {
             name: 'Rush Team Builder', 
-            icon: <Group />, 
+            icon: <FontAwesomeIcon icon={faUsers} />, 
             isActive: isActiveRoute('/rushteam'), 
             path: '/rushteam',
             disabled: true
         },
         {
             name: 'Account Transfer', 
-            icon: <CompareArrows />, 
+            icon: <FontAwesomeIcon icon={faExchangeAlt} />, 
             isActive: isActiveRoute('/accounttransfer'), 
             path: '/accounttransfer',
             disabled: false
         },
         {
             name: 'Pack Opener', 
-            icon: <Restaurant />, 
+            icon: <FontAwesomeIcon icon={faBoxOpen} />, 
             isActive: isActiveRoute('/packopener'), 
             path: '/packopener',
             disabled: true
@@ -90,58 +92,75 @@ export default function Navbar() {
     const openMenu = Boolean(menuAnchor)
 
     return(
-        <>
-            <BrowserView>
-                <Grid container spacing={1}>
+        <header>
+            <input type='checkbox' id='navToggle' className='navToggle'/>
+            <nav>
+                <ul>
                     {routes.map((route: Route) => (
-                        <Grid item key={route.path}>
-                            <Button 
-                                variant={route.isActive ? 'contained' : 'outlined'}
-                                disabled={route.disabled}
-                                onClick={() => handleNavButtonClick(route)}
-                            >
-                                {route.icon}&nbsp;
-                                {route.name}
-                            </Button>
-                        </Grid>
+                        <li key={route.path}>
+                            <a href='#'>
+                                {route.icon ? route.icon : route.name}
+                            </a>
+                        </li>
                     ))}
-                </Grid>
-            </BrowserView>
-            <MobileView>
-                <AppBar position='static'>
-                    <Toolbar>
-                        <Typography variant="body1" component="div" sx={{ flexGrow: 1 }}>
-                            Menu
-                        </Typography>
-                        <IconButton 
-                            color='primary'
-                            aria-controls="basic-menu"
-                            aria-haspopup="true"
-                            aria-expanded={openMenu ? 'true' : undefined}
-                            onClick={handleMenuClick}
-                        >
-                            <MenuIcon/>
-                        </IconButton>
-                        <Menu
-                            id='nav-menu'
-                            anchorEl={menuAnchor}
-                            open={openMenu}
-                            onClose={handleMenuClose}
-                        >
-                            {routes.map((route: Route) => (
-                                <MenuItem
-                                    key={route.path}
-                                    disabled={route.disabled}
-                                    onClick={() => handleNavButtonClick(route)}
-                                >
-                                    {route.icon}&nbsp;
-                                    {route.name}
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </Toolbar>
-                </AppBar>
-            </MobileView>
-        </>
+                </ul>
+            </nav>
+            <label htmlFor='navToggle' className='navToggleLabel'>
+                <span></span>
+            </label>
+        </header>
+        // <>
+        //     <BrowserView>
+        //         <Grid container spacing={1}>
+        //             {routes.map((route: Route) => (
+        //                 <Grid item key={route.path}>
+        //                     <Button 
+        //                         variant={route.isActive ? 'contained' : 'outlined'}
+        //                         disabled={route.disabled}
+        //                         onClick={() => handleNavButtonClick(route)}
+        //                     >
+        //                         {route.icon}&nbsp;
+        //                         {route.name}
+        //                     </Button>
+        //                 </Grid>
+        //             ))}
+        //         </Grid>
+        //     </BrowserView>
+        //     <MobileView>
+        //         <AppBar position='static'>
+        //             <Toolbar>
+        //                 <Typography variant="body1" component="div" sx={{ flexGrow: 1 }}>
+        //                     Menu
+        //                 </Typography>
+        //                 <IconButton 
+        //                     color='primary'
+        //                     aria-controls="basic-menu"
+        //                     aria-haspopup="true"
+        //                     aria-expanded={openMenu ? 'true' : undefined}
+        //                     onClick={handleMenuClick}
+        //                 >
+        //                     <MenuIcon/>
+        //                 </IconButton>
+        //                 <Menu
+        //                     id='nav-menu'
+        //                     anchorEl={menuAnchor}
+        //                     open={openMenu}
+        //                     onClose={handleMenuClose}
+        //                 >
+        //                     {routes.map((route: Route) => (
+        //                         <MenuItem
+        //                             key={route.path}
+        //                             disabled={route.disabled}
+        //                             onClick={() => handleNavButtonClick(route)}
+        //                         >
+        //                             {route.icon}&nbsp;
+        //                             {route.name}
+        //                         </MenuItem>
+        //                     ))}
+        //                 </Menu>
+        //             </Toolbar>
+        //         </AppBar>
+        //     </MobileView>
+        // </>
     )
 }

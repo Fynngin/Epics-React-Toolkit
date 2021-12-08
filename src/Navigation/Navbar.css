@@ -1,0 +1,150 @@
+header {
+    /* margin-top: 1em; */
+    background: var(--background);
+    text-align: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+nav {
+    background: var(--background);
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    top: 100%;
+    left: 0;
+    transform: scale(1, 0);
+    transform-origin: top;
+    transition: transform 350ms ease-in-out;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav li {
+    margin-bottom: 1em;
+    margin-left: 1em;
+}
+
+nav a {
+    color: white;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+}
+
+nav a:hover {
+    color: var(--primary);
+}
+
+.navToggle {
+    display: none;
+    border: none !important;
+}
+
+.navToggle:checked ~ nav {
+    transform: scale(1, 1);
+}
+
+.navToggle:checked ~ nav a {
+    opacity: 1;
+    transition: opacity 250ms ease-in-out 250ms;
+}
+
+.navToggleLabel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 1em;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.navToggleLabel span,
+.navToggleLabel span::before,
+.navToggleLabel span::after {
+    display: block;
+    background: white;
+    height: 2px;
+    width: 1.5em;
+    border-radius: 2px;
+    position: relative;
+}
+
+.navToggleLabel span::before,
+.navToggleLabel span::after {
+    content: '';
+    position: absolute;
+}
+
+.navToggleLabel span::before {
+    bottom: 7px;
+}
+
+.navToggleLabel span::after {
+    top: 7px;
+}
+
+@media screen and (min-width: 800px) {
+    .navToggleLabel {
+        display: none;
+    }
+  
+    header {
+        display: grid;
+        grid-template-columns: 1fr minmax(900px, 1fr) 1fr;
+        padding-top: 1em;
+    }
+    
+    nav {
+        all: unset;
+        grid-column: 2 / 3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    nav ul {
+        display: flex;
+        border-bottom: 2px solid var(--primary);
+    }
+    
+    nav li {
+        margin-left: 3em;
+        margin-bottom: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    nav li:hover {
+        cursor: pointer;
+    }
+    
+    nav a {
+        opacity: 1;
+        position: relative;
+    }
+    
+    nav a::before {
+        content: '';
+        display: block;
+        height: 5px;
+        background: var(--primary);
+        position: absolute;
+        top: -1em;
+        left: 0;
+        right: 0;
+        transform: scale(0, 1);
+        transition: transform ease-in-out 250ms;
+    }
+    
+    nav li:hover a::before {
+        transform: scale(1,1);
+    }
+}   

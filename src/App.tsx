@@ -11,6 +11,7 @@ import {
 import { useContext, createContext, useState } from "react";
 import { User } from './interfaces/User';
 import AccountTransfer from './AccountTransfer/AccountTransfer';
+import Navbar from './Navigation/Navbar';
 
 interface Auth {
   user: User
@@ -60,7 +61,10 @@ function PrivateRoute({ children, ...rest }: any) {
       {...rest}
       render={({ location }) =>
         auth.user.jwt ? (
-          children
+          <>
+            <Navbar/>
+            {children}
+          </>
         ) : (
           <Redirect
             to={{
