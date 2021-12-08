@@ -126,6 +126,10 @@ nav ul button {
     .routeLabel {
         display: none;
     }
+
+    .routeContainer {
+        all: unset;
+    }
   
     header {
         display: grid;
