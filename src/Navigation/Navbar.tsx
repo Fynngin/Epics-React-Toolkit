@@ -88,7 +88,7 @@ export default function Navbar() {
             <nav>
                 <ul>
                     {routes.map((route: Route) => (
-                        <li key={route.path} onClick={() => handleNavButtonClick(route)}>
+                        <li key={route.path} onClick={() => handleNavButtonClick(route)} title={route.name}>
                             <button >
                                 {route.icon 
                                     ? 
