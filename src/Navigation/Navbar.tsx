@@ -1,6 +1,7 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faBoxOpen, faExchangeAlt, faGamepad, faHome, faSearch, faTags, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRef } from "react";
 import { useHistory } from "react-router";
 import './Navbar.css';
 
@@ -15,6 +16,7 @@ interface Route {
 
 export default function Navbar() {
     const history = useHistory();
+    const navToggleRef = useRef<HTMLInputElement>(null);
 
     const isActiveRoute = (routeName: string) => {
         return routeName === history.location.pathname;
@@ -76,11 +78,13 @@ export default function Navbar() {
         const from: any = history.location.state || { from: { pathname: '/' } };
         history.replace(from);
         history.push(route.path);
+        if (navToggleRef.current)
+            navToggleRef.current.checked = false;
     }
 
     return(
         <header>
-            <input type='checkbox' id='navToggle' className='navToggle'/>
+            <input ref={navToggleRef} type='checkbox' id='navToggle' className='navToggle'/>
             <nav>
                 <ul>
                     {routes.map((route: Route) => (
