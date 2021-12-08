@@ -1,7 +1,6 @@
 import './AccountTransfer.css';
 import { useEffect, useState } from "react";
 import { UserSearchResult } from "../interfaces/UserSearchResult";
-import Navbar from "../Navigation/Navbar";
 import AccountSelector from "./AccountSelector";
 import { getAllItemIds, getUserCollections } from '../api/api';
 import { useAuth } from '../App';
@@ -54,7 +53,6 @@ export default function AccountTransfer() {
 
     return(
         <div className='accTransferContainer'>
-            <Navbar/>
             {totalCollections > 0 && collectionProgress < totalCollections ?
                 <ProgressBar max={totalCollections} progress={collectionProgress}/>
             : <></>}

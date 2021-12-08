@@ -63,7 +63,9 @@ function PrivateRoute({ children, ...rest }: any) {
         auth.user.jwt ? (
           <>
             <Navbar/>
-            {children}
+            <div className='componentContainer'>
+              {children}
+            </div>
           </>
         ) : (
           <Redirect
