@@ -1,3 +1,4 @@
+import BaseCheckbox from "../BaseComponents/BaseCheckbox";
 import BaseContainer from "../BaseComponents/BaseContainer";
 import './FilterSelector.css';
 
@@ -14,19 +15,25 @@ export default function FilterSelector({onChange}: Props) {
     }
 
     return(
-        <BaseContainer title='Filter Seasons / Collections' description='Change which Seasons you want to include in the transfer.'>
+        <BaseContainer title='Filter Seasons' description='Change which Seasons you want to include in the transfer.'>
             <div className='seasonsContainer'>
                 {seasons.map(season => (
-                    <label key={season} className="checkbox">
-                        <input 
-                            type="checkbox" 
-                            defaultChecked
-                            onChange={handleSeasonSelect}
-                            value={season}
-                            name={season}
-                        />
-                        {season}
-                  </label>
+                    <BaseCheckbox
+                        key={season}
+                        type='checkbox'
+                        label={season}
+                        onChange={handleSeasonSelect}
+                    />
+                //     <label key={season} className="checkbox">
+                //         <input 
+                //             type="checkbox" 
+                //             defaultChecked
+                //             onChange={handleSeasonSelect}
+                //             value={season}
+                //             name={season}
+                //         />
+                //         {season}
+                //   </label>
                 ))}
             </div>
         </BaseContainer>

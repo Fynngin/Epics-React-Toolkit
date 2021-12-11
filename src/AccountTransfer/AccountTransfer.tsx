@@ -8,6 +8,7 @@ import { UserCollection } from '../interfaces/UserCollection';
 import BaseButton from '../BaseComponents/BaseButton';
 import ProgressBar from '../BaseComponents/ProgressBar';
 import FilterSelector from './FilterSelector';
+import ModeSwitcher, { TransferMode } from './ModeSwitcher';
 
 interface TradeItem {
     id: number
@@ -15,6 +16,7 @@ interface TradeItem {
 }
 
 export default function AccountTransfer() {
+    const [transferMode, setTransfermode] = useState(TransferMode.SEND);
     const [selectedUser, setSelectedUser] = useState({} as UserSearchResult);
     const [tradeItems, setTradeItems] = useState([] as TradeItem[]);
     const [collectionProgress, setCollectionProgress] = useState(0);
@@ -53,16 +55,27 @@ export default function AccountTransfer() {
         setAllowedSeasons(seasons);
     }
 
+    function handleModeSelect(mode: TransferMode) {
+        setTransfermode(mode);
+    }
+
     useEffect(() => setCollectionProgress(c => c + 1), [tradeItems])
 
     return(
         <div className='accTransferContainer'>
+            <ModeSwitcher onChange={handleModeSelect}/>
             {totalCollections > 0 && collectionProgress < totalCollections ?
                 <ProgressBar max={totalCollections} progress={collectionProgress}/>
             : <></>}
             <AccountSelector onUserSelect={user => handleUserSelect(user)}/>
-            <FilterSelector onChange={handleSeasonSelect}/>
-            <BaseButton onClick={() => scanUserItems()}>Start Transfer</BaseButton>
+            {transferMode === TransferMode.SEND
+                ? <>
+                    <FilterSelector onChange={handleSeasonSelect}/>
+                    <BaseButton onClick={() => scanUserItems()}>Start Transfer</BaseButton>
+                </>
+                : <>
+                </>
+            }
             <p>{tradeItems.length}</p>
         </div>
     )
