@@ -6,11 +6,12 @@ type Props = {
     description?: string
     className?: string
     children?: ReactNode
+    loading?: boolean
 }
 
-export default function BaseContainer({title, description, className, children}: Props) {
+export default function BaseContainer({title, description, className, children, loading}: Props) {
     return(
-        <div className={`baseContainer ${className}`}>
+        <div className={`baseContainer ${className} ${loading ? 'loading' : ''}`}>
             {title ?
                 <h2 className='baseContainerTitle'>
                     {title}

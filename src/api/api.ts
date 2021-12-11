@@ -132,7 +132,7 @@ export async function getAllItemIds(jwt: string, userId: number, collectionId: n
     return ids;
 }
 
-export async function getIncomingTrades(jwt: string, categroyId: number) {
+export async function getIncomingTrades(jwt: string, categroyId: number, userId: number): Promise<Trade[]> {
     let trades = [] as Trade[];
     let page = 1;
 
@@ -158,7 +158,11 @@ export async function getIncomingTrades(jwt: string, categroyId: number) {
         
         for (const el of response.data.data.trades) {
             const trade = el as Trade;
+            if (trade.offeredBy === userId)
+                continue;
             trades.push(trade);
         }
     }
+
+    return trades;
 }

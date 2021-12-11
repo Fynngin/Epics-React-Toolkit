@@ -7,17 +7,21 @@
     position: relative;
 }
 
+.baseContainer.loading {
+    overflow: hidden;
+}
+
 .baseContainer.loading::before {
     content: "";
     background-image: conic-gradient(
         var(--primary) 20deg,
         transparent 120deg
     );
-    height: 200%;
-    width: 200%;
+    height: 800%;
+    width: 400%;
     position: absolute;
-    top: -50%;
-    left: -50%;
+    top: -350%;
+    left: -150%;
     animation: rotate 2s linear infinite;
 }
 
