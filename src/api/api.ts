@@ -6,6 +6,7 @@ import { Spinner } from "../interfaces/Spinner";
 import { User } from "../interfaces/User";
 import { UserSearchResult } from "../interfaces/UserSearchResult";
 import { UserCollection } from "../interfaces/UserCollection";
+import { Trade } from "../interfaces/Trade";
 
 const http = axiosRateLimit(axios.create(), {maxRequests: 130, perMilliseconds: 60000})
 
@@ -87,6 +88,7 @@ export async function searchUsers(jwt: string, username: string): Promise<UserSe
 
 export async function getUserCollections(jwt: string, userId: number, categoryId: number): Promise<UserCollection[]> {
     const response: any = await http(`https://api.epics.gg/api/v1/collections/users/${userId}/user-summary`, {
+        method: 'GET',
         headers: {
             'x-user-jwt': jwt
         },
@@ -103,6 +105,7 @@ export async function getUserCollections(jwt: string, userId: number, categoryId
 
 export async function getAllItemIds(jwt: string, userId: number, collectionId: number, itemType: 'card'|'sticker', categoryId: number): Promise<number[]> {
     const response: any = await http(`https://api.epics.gg/api/v1/collections/users/${userId}/${itemType}ids`, {
+        method: 'GET',
         headers: {
             'x-user-jwt': jwt
         },
@@ -127,4 +130,35 @@ export async function getAllItemIds(jwt: string, userId: number, collectionId: n
     }
 
     return ids;
+}
+
+export async function getIncomingTrades(jwt: string, categroyId: number) {
+    let trades = [] as Trade[];
+    let page = 1;
+
+    while (true) {
+        const response: any = await http('https://api.epics.gg/api/v1/trade', {
+            method: 'GET',
+            headers: {
+                'x-user-jwt': jwt
+            },
+            params: {
+                'page': page,
+                'categoryId': categroyId,
+                'status': 'open'
+            }
+        });
+        page += 1;
+
+        if (response.status !== 200)
+            break;
+        
+        if (response.data.data.count === 0)
+            break;
+        
+        for (const el of response.data.data.trades) {
+            const trade = el as Trade;
+            trades.push(trade);
+        }
+    }
 }

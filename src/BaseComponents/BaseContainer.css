@@ -5,7 +5,6 @@
     border-radius: 0.5em;
     background: var(--secondary);
     position: relative;
-    overflow: hidden;
 }
 
 .baseContainer.loading::before {

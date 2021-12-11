@@ -9,6 +9,7 @@ import BaseButton from '../BaseComponents/BaseButton';
 import ProgressBar from '../BaseComponents/ProgressBar';
 import FilterSelector from './FilterSelector';
 import ModeSwitcher, { TransferMode } from './ModeSwitcher';
+import TradeOverview from './TradeOverview';
 
 interface TradeItem {
     id: number
@@ -74,6 +75,7 @@ export default function AccountTransfer() {
                     <BaseButton onClick={() => scanUserItems()}>Start Transfer</BaseButton>
                 </>
                 : <>
+                    <TradeOverview user={selectedUser.username} />
                 </>
             }
             <p>{tradeItems.length}</p>
