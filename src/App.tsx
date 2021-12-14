@@ -12,6 +12,7 @@ import { useContext, createContext, useState } from "react";
 import { User } from './interfaces/User';
 import AccountTransfer from './AccountTransfer/AccountTransfer';
 import Navbar from './Navigation/Navbar';
+import FancyShowcase from './FancyShowcase/FancyShowcase';
 
 interface Auth {
   user: User
@@ -88,6 +89,9 @@ function App() {
           <Route path='/login' exact render={() => <Login/>}/>
           <PrivateRoute path='/accounttransfer'>
             <AccountTransfer/>
+          </PrivateRoute>
+          <PrivateRoute path='/showcase'>
+            <FancyShowcase/>
           </PrivateRoute>
           <PrivateRoute path='/'>
             <Home/>

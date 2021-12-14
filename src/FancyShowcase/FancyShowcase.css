@@ -1,0 +1,17 @@
+.showcasePage {
+    display: grid;
+    justify-items: center;
+}
+
+.showcaseContainer {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    gap: 1em;
+    overflow-x: scroll;
+    padding-bottom: 1em;
+}
+
+.cardImage {
+    height: 250px;
+}
