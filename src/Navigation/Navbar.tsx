@@ -1,5 +1,5 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faBoxOpen, faExchangeAlt, faGamepad, faHome, faSearch, faTags, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faBoxOpen, faExchangeAlt, faFire, faGamepad, faHome, faSearch, faTags, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef } from "react";
 import { useHistory } from "react-router";
@@ -71,6 +71,13 @@ export default function Navbar() {
             isActive: isActiveRoute('/packopener'), 
             path: '/packopener',
             disabled: true
+        },
+        {
+            name: 'Showcase',
+            icon: faFire,
+            isActive: isActiveRoute('/showcase'),
+            path: '/showcase',
+            disabled: false
         }
     ]
 
