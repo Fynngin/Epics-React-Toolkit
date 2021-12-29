@@ -169,7 +169,7 @@ export async function getIncomingTrades(jwt: string, categroyId: number, userId:
 }
 
 export async function getMainShowcase(jwt: string, userId: number): Promise<Showcase> {
-    const response: any = await http('https://api.epics.gg/api/v1/showcase/32876/main?categoryId=1', {
+    const response: any = await http(`https://api.epics.gg/api/v1/showcase/${userId}/main`, {
         method: 'GET',
         headers: {
             'x-user-jwt': jwt
@@ -180,4 +180,18 @@ export async function getMainShowcase(jwt: string, userId: number): Promise<Show
         return {} as Showcase;
     
     return response.data.data as Showcase;
+}
+
+export async function getAllShowcases(jwt: string, userId: number): Promise<Showcase[]> {
+    const response: any = await http(`https://api.epics.gg/api/v1/showcase/${userId}/shelves`, {
+        method: 'GET',
+        headers: {
+            'x-user-jwt': jwt
+        }
+    })
+
+    if (response.status !== 200)
+        return [];
+    
+    return response.data.data.showcases as Showcase[];
 }
