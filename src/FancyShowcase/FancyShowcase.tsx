@@ -38,23 +38,23 @@ export default function FancyShowcase() {
     }, [auth]);
 
     function handleDragEnd(event: DragEndEvent) {
-        console.log(event);
         const {active, over} = event;
         
         if (!over)
             return;
 
+        if (active.id === over.id)
+            return;
+        
         const [activeShowcaseKey, activeItemId] = active.id.split(divider);
         const [overShowcaseKey, overItemId] = over.id.split(divider);
         const oldIndex = showcases[activeShowcaseKey].cards.findIndex(el => el.id.toString() === activeItemId);
         const newIndex = showcases[overShowcaseKey].cards.findIndex(el => el.id.toString() === overItemId);
         
         let oldShowcase = showcases[activeShowcaseKey];
-        if (active.id === over.id) {
-            if (activeShowcaseKey === overShowcaseKey) {
+        if (activeShowcaseKey === overShowcaseKey) {
                 oldShowcase.cards = arrayMove(oldShowcase.cards, oldIndex, newIndex);
-                setShowcases(s => ({...s, [overShowcaseKey]: oldShowcase}))
-            }
+                setShowcases(s => ({...s, [overShowcaseKey]: oldShowcase}));
         } else {
             let newShowcase = showcases[overShowcaseKey];
             newShowcase.cards.splice(newIndex, 0, oldShowcase.cards[oldIndex]);
