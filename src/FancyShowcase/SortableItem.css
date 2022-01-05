@@ -1,0 +1,56 @@
+.sortableItemContainer {
+    position: relative;
+}
+
+.dragHandle {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 2em;
+    height: 2em;
+    background: var(--secondary);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.8;
+}
+
+.dragHandle:hover {
+    opacity: 1;
+    border: 1px solid var(--primary);
+}
+
+.dot {
+    position: relative;
+    display: block;
+    background: white;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.dot::after {
+    position: absolute;
+    content: "";
+    display: block;
+    background: white;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    z-index: 10;
+    top: 0.375em;
+}
+
+.dot::before {
+    content: "";
+    display: block;
+    position: absolute;
+    background: white;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    z-index: 10;
+    bottom: 0.375em;
+}
