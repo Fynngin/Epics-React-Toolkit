@@ -13,7 +13,6 @@ body {
   background-color: var(--background);
   color: white;
   padding: 1em;
-  /* max-height: 100%; */
 }
 
 a {

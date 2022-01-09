@@ -1,6 +1,7 @@
 .showcasePage {
-    display: grid;
-    justify-items: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     gap: 1em;
 }
 
