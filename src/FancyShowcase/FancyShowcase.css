@@ -12,3 +12,22 @@
     overflow-x: scroll;
     padding-bottom: 1em;
 }
+
+.btnRow {
+    max-width: var(--max-app-width);
+    width: 100%;
+    padding-left: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid var(--primary);
+    border-radius: 0.5em;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+.btnRow > button {
+    border: none;
+    border-radius: 0;
+    background: var(--background);
+}

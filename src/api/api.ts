@@ -8,6 +8,7 @@ import { UserSearchResult } from "../interfaces/UserSearchResult";
 import { UserCollection } from "../interfaces/UserCollection";
 import { Trade } from "../interfaces/Trade";
 import { Showcase } from "../interfaces/Showcase";
+import { ShowcasePayload } from "../interfaces/ShowcasePayload";
 
 const http = axiosRateLimit(axios.create(), {maxRequests: 130, perMilliseconds: 60000})
 
@@ -194,4 +195,19 @@ export async function getAllShowcases(jwt: string, userId: number): Promise<Show
         return [];
     
     return response.data.data.showcases as Showcase[];
+}
+
+export async function changeShowcase(jwt: string, showcase: ShowcasePayload): Promise<Showcase> {
+    const response: any = await http(`https://api.epics.gg/api/v1/showcase/shelf/${showcase.id}`, {
+        method: 'PATCH',
+        headers: {
+            'x-user-jwt': jwt
+        },
+        data: showcase
+    })
+
+    if (response.status !== 200)
+        return {} as Showcase;
+    
+    return response.data.data as Showcase;
 }
