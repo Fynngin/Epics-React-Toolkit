@@ -69,7 +69,7 @@ nav button:hover {
     position: absolute;
     cursor: pointer;
     top: 0;
-    left: 0;
+    left: 1em;
     height: 100%;
     display: flex;
     align-items: center;
