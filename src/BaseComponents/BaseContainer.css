@@ -32,7 +32,7 @@
     background: var(--secondary);
 }
 
-.baseContainer > * {
+.baseContainer.loading > * {
     position: relative;
     z-index: 10;
 }
